@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Care Heart Ltd. – We Care About You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:     #1E3A8A;   /* azul oscuro institucional */
+      --green:    #2E7D32;   /* verde institucional */
+      --sky:      #4FC3F7;   /* celeste del corazon */
+      --blue-mid: #2552B8;   /* azul medio para hover */
+      --green-lt: #43A047;   /* verde claro */
+      --cream:    #F4F8FF;   /* fondo suave azulado */
+      --light:    #EAF3EA;   /* fondo verde muy suave */
+      --white:    #FFFFFF;
+      --text:     #1A2B4A;
+      --muted:    #5A6E8A;
+      --navy:     #0D1F3C;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #e8f0fe; }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 5vw;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 2px solid rgba(30,58,138,.1);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(30,58,138,.1); }
+    .nav-logo img { height: 60px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: .87rem; font-weight: 600; color: var(--text); transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta {
+      background: var(--green); color: #fff; padding: .55rem 1.4rem;
+      border-radius: 999px; font-size: .85rem; font-weight: 600;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(46,125,50,.35); background: var(--green-lt); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--blue); border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 5vw 5rem; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(135deg, #F4F8FF 0%, #EAF3FF 45%, #EAF3EA 100%);
+    }
+    .hero-shape {
+      position: absolute; border-radius: 50%; filter: blur(90px); opacity: .45; z-index: 0;
+      animation: pulse 7s ease-in-out infinite;
+    }
+    .hs1 { width: 500px; height: 500px; background: rgba(30,58,138,.18); top: -120px; right: -100px; }
+    .hs2 { width: 380px; height: 380px; background: rgba(46,125,50,.15); bottom: -80px; left: -80px; animation-delay: 2.5s; }
+    .hs3 { width: 220px; height: 220px; background: rgba(79,195,247,.25); top: 35%; right: 18%; animation-delay: 5s; }
+    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(35px)} to{opacity:1;transform:translateY(0)} }
+    .hero-text { animation: fadeUp .8s ease both; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(30,58,138,.08); border: 1px solid rgba(30,58,138,.2);
+      color: var(--blue); font-size: .78rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .4rem 1rem; border-radius: 999px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif; font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 900; line-height: 1.06; color: var(--navy); margin-bottom: 1.4rem;
+    }
+    .hero h1 .accent { color: var(--green); font-style: italic; }
+    .hero-desc { font-size: 1.05rem; line-height: 1.8; color: var(--muted); margin-bottom: 2.2rem; max-width: 480px; }
+    .btn-green { background: var(--green); color: #fff; padding: .85rem 2rem; border-radius: 999px; font-weight: 600; text-decoration: none; transition: .2s; display: inline-block; }
+    .btn-green:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(46,125,50,.35); background: var(--green-lt); }
+    .btn-blue { background: var(--blue); color: #fff; padding: .85rem 2rem; border-radius: 999px; font-weight: 600; text-decoration: none; transition: .2s; display: inline-block; }
+    .btn-blue:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(30,58,138,.3); background: var(--blue-mid); }
+    .btn-outline { border: 2px solid var(--blue); color: var(--blue); padding: .83rem 2rem; border-radius: 999px; font-weight: 600; text-decoration: none; transition: .2s; display: inline-block; }
+    .btn-outline:hover { background: var(--blue); color: #fff; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-visual { animation: fadeUp .8s .2s ease both; display: flex; justify-content: center; align-items: center; }
+    .hero-logo-wrap {
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-logo-bg {
+      width: 340px; height: 340px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,195,247,.15) 0%, rgba(30,58,138,.08) 60%, transparent 100%);
+      display: flex; align-items: center; justify-content: center;
+      animation: pulse 5s ease-in-out infinite;
+    }
+    .hero-logo-bg img { width: 280px; height: auto; filter: drop-shadow(0 20px 50px rgba(30,58,138,.2)); }
+    .hero-badge-float {
+      position: absolute; background: var(--white); border-radius: 14px;
+      padding: .9rem 1.2rem; box-shadow: 0 12px 40px rgba(30,58,138,.15);
+    }
+    .hbf1 { bottom: 10px; left: -20px; }
+    .hbf2 { top: 20px; right: -10px; }
+    .hbf-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .2rem; }
+    .hbf-val { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 900; color: var(--blue); }
+    .hbf-val.green { color: var(--green); }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--blue); color: #fff;
+      display: grid; grid-template-columns: repeat(4,1fr); text-align: center;
+    }
+    .stat-item { padding: 2.5rem 1rem; border-right: 1px solid rgba(255,255,255,.1); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 900; color: var(--sky); }
+    .stat-label { font-size: .82rem; color: rgba(255,255,255,.65); margin-top: .3rem; font-weight: 500; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 5vw; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--green); margin-bottom: .6rem; }
+    .section-title { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--navy); line-height: 1.15; margin-bottom: 1rem; }
+    .section-title .it { font-style: italic; color: var(--blue); }
+    .section-title .itg { font-style: italic; color: var(--green); }
+    .section-desc { color: var(--muted); line-height: 1.8; max-width: 560px; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px,1fr)); gap: 1.5rem; }
+    .srv-card { border-radius: 20px; padding: 2rem; transition: transform .3s, box-shadow .3s; }
+    .srv-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(30,58,138,.12); }
+    .srv-card.s1 { background: linear-gradient(145deg,#E8F0FE,#D0E4FF); }
+    .srv-card.s2 { background: linear-gradient(145deg,#E8F5E9,#C8E6C9); }
+    .srv-card.s3 { background: linear-gradient(145deg,#E1F5FE,#B3E5FC); }
+    .srv-card.s4 { background: linear-gradient(145deg,#E8F0FE,#C8DBFF); }
+    .srv-icon { font-size: 2.5rem; margin-bottom: 1.2rem; display: block; }
+    .srv-card h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: .6rem; }
+    .srv-card p { font-size: .88rem; line-height: 1.7; color: var(--muted); }
+    .srv-tag { display: inline-block; margin-top: 1rem; font-size: .75rem; font-weight: 700; padding: .3rem .8rem; border-radius: 999px; background: rgba(30,58,138,.1); color: var(--blue); }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--cream); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .price-card { background: var(--white); border-radius: 24px; padding: 2.2rem; border: 2px solid transparent; transition: .3s; position: relative; }
+    .price-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(30,58,138,.12); }
+    .price-card.featured { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .price-badge { position: absolute; top: 1.2rem; right: 1.2rem; background: var(--sky); color: var(--navy); font-size: .72rem; font-weight: 700; padding: .25rem .7rem; border-radius: 999px; }
+    .price-name { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: .8rem; }
+    .price-card.featured .price-name { color: var(--sky); }
+    .price-amount { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 900; color: var(--navy); line-height: 1; }
+    .price-card.featured .price-amount { color: #fff; }
+    .price-period { font-size: .82rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .price-card.featured .price-period { color: rgba(255,255,255,.6); }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.8rem; }
+    .price-features li { font-size: .88rem; display: flex; align-items: center; gap: .6rem; color: var(--text); }
+    .price-card.featured .price-features li { color: rgba(255,255,255,.85); }
+    .price-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .price-card.featured .price-features li::before { color: var(--sky); }
+    .btn-price { display: block; text-align: center; padding: .85rem; border-radius: 999px; font-weight: 600; font-size: .9rem; text-decoration: none; transition: .2s; }
+    .btn-price-blue { border: 2px solid var(--blue); color: var(--blue); }
+    .btn-price-blue:hover { background: var(--blue); color: #fff; }
+    .btn-price-sky { background: var(--sky); color: var(--navy); }
+    .btn-price-sky:hover { background: #29b6f6; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-visual { position: relative; }
+    .about-img-placeholder { width: 100%; aspect-ratio: 4/3; border-radius: 24px; background: linear-gradient(135deg, var(--blue), var(--green)); display: flex; align-items: center; justify-content: center; }
+    .about-img-placeholder img { width: 65%; height: auto; filter: drop-shadow(0 10px 30px rgba(0,0,0,.2)); }
+    .about-stat-bubble { position: absolute; background: var(--white); border-radius: 16px; padding: 1rem 1.3rem; box-shadow: 0 12px 40px rgba(30,58,138,.15); }
+    .asb1 { bottom: -1.5rem; left: -1.5rem; }
+    .asb2 { top: -1.5rem; right: -1.5rem; }
+    .asb-num { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 900; color: var(--blue); }
+    .asb-num.green { color: var(--green); }
+    .asb-label { font-size: .78rem; color: var(--muted); font-weight: 500; }
+    .timeline { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .tl-item { display: flex; gap: 1rem; }
+    .tl-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+    .tl-dot.blue { background: var(--blue); color: #fff; }
+    .tl-dot.green { background: var(--green); color: #fff; }
+    .tl-dot.sky { background: var(--sky); color: var(--navy); }
+    .tl-content h4 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .3rem; }
+    .tl-content p { font-size: .87rem; line-height: 1.7; color: var(--muted); }
+
+    /* ── MVV ── */
+    #mvv { background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+    .mvv-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(79,195,247,.1) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 10% 80%, rgba(46,125,50,.12) 0%, transparent 70%); }
+    .mvv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; position: relative; z-index: 1; }
+    .mvv-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 2rem; }
+    .mvv-card h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--sky); margin-bottom: .8rem; }
+    .mvv-card p { font-size: .9rem; line-height: 1.8; color: rgba(255,255,255,.75); }
+    .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2rem; position: relative; z-index: 1; }
+    .val-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 1.3rem; transition: .3s; }
+    .val-card:hover { background: rgba(79,195,247,.1); border-color: rgba(79,195,247,.25); }
+    .val-icon { font-size: 1.5rem; margin-bottom: .6rem; }
+    .val-card h4 { font-size: .9rem; font-weight: 600; color: #fff; margin-bottom: .3rem; }
+    .val-card p { font-size: .8rem; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--light); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .testi-card { background: var(--white); border-radius: 20px; padding: 2rem; transition: .3s; border-top: 4px solid transparent; }
+    .testi-card:nth-child(1) { border-top-color: var(--blue); }
+    .testi-card:nth-child(2) { border-top-color: var(--green); }
+    .testi-card:nth-child(3) { border-top-color: var(--sky); }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(30,58,138,.1); }
+    .testi-quote { font-size: 3rem; font-family: Georgia, serif; line-height: 1; margin-bottom: .3rem; opacity: .2; color: var(--blue); }
+    .testi-text { font-size: .92rem; line-height: 1.75; color: var(--text); margin-bottom: 1.5rem; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: .8rem; }
+    .testi-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .av1 { background: linear-gradient(135deg,var(--blue),var(--sky)); }
+    .av2 { background: linear-gradient(135deg,var(--green),#81C784); }
+    .av3 { background: linear-gradient(135deg,var(--sky),#B3E5FC); }
+    .testi-name { font-weight: 600; font-size: .9rem; color: var(--navy); }
+    .testi-role { font-size: .78rem; color: var(--muted); }
+    .stars { color: var(--green); font-size: .85rem; margin-bottom: .8rem; }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--white); }
+    .gallery-note { background: linear-gradient(135deg,rgba(30,58,138,.07),rgba(46,125,50,.07)); border: 1px dashed rgba(30,58,138,.25); border-radius: 16px; padding: 1.5rem; margin-top: 2rem; text-align: center; color: var(--muted); font-size: .9rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,180px); gap: 1rem; margin-top: 1.5rem; }
+    .gal-item { border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; transition: .3s; cursor: pointer; }
+    .gal-item:hover { transform: scale(1.02); }
+    .gal-item.tall { grid-row: span 2; }
+    .gi1 { background: linear-gradient(135deg,#E8F0FE,#C8DBFF); }
+    .gi2 { background: linear-gradient(135deg,#E8F5E9,#C8E6C9); }
+    .gi3 { background: linear-gradient(135deg,#E1F5FE,#B3E5FC); }
+    .gi4 { background: linear-gradient(135deg,#E8F0FE,#D0E4FF); }
+    .gi5 { background: linear-gradient(135deg,#E8F5E9,#D0EDD0); }
+
+    /* ── FAQ ── */
+    #faq { background: var(--cream); }
+    .faq-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; max-width: 760px; }
+    .faq-item { background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid rgba(30,58,138,.08); }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 1.3rem 1.5rem; cursor: pointer; font-weight: 600; font-size: .95rem; color: var(--navy); transition: .2s; gap: 1rem; }
+    .faq-q:hover { color: var(--blue); }
+    .faq-icon { font-size: 1.2rem; transition: transform .3s; flex-shrink: 0; color: var(--blue); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s; font-size: .88rem; line-height: 1.8; color: var(--muted); padding: 0 1.5rem; }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.3rem; }
+
+    /* ── BLOG ── */
+    #blog { background: var(--white); }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .blog-card { border-radius: 20px; overflow: hidden; background: var(--cream); transition: .3s; }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(30,58,138,.08); }
+    .blog-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .bt1 { background: linear-gradient(135deg,#E8F0FE,#C8DBFF); }
+    .bt2 { background: linear-gradient(135deg,#E8F5E9,#C8E6C9); }
+    .bt3 { background: linear-gradient(135deg,#E1F5FE,#B3E5FC); }
+    .blog-body { padding: 1.5rem; }
+    .blog-tag { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); margin-bottom: .5rem; }
+    .blog-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; line-height: 1.3; }
+    .blog-card p { font-size: .83rem; color: var(--muted); line-height: 1.65; }
+    .blog-date { font-size: .75rem; color: var(--muted); margin-top: .8rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--light); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+    .contact-info h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+    .contact-info p { font-size: .92rem; line-height: 1.8; color: var(--muted); margin-bottom: 2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; background: var(--white); padding: 1rem 1.3rem; border-radius: 14px; text-decoration: none; color: var(--text); transition: .2s; }
+    .contact-item:hover { box-shadow: 0 8px 24px rgba(30,58,138,.1); transform: translateX(4px); }
+    .ci-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .ci-blue  { background: rgba(30,58,138,.1); }
+    .ci-green { background: rgba(46,125,50,.1); }
+    .ci-sky   { background: rgba(79,195,247,.15); }
+    .ci-text strong { display: block; font-size: .85rem; font-weight: 600; color: var(--navy); }
+    .ci-text span { font-size: .8rem; color: var(--muted); }
+    .contact-form { background: var(--white); border-radius: 24px; padding: 2.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: .8rem; font-weight: 600; color: var(--navy); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: .8rem 1rem; border: 1.5px solid rgba(30,58,138,.12);
+      border-radius: 10px; font-family: inherit; font-size: .9rem;
+      color: var(--text); background: var(--cream); transition: border .2s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); background: #fff; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-submit { width: 100%; padding: 1rem; background: var(--blue); color: #fff; border: none; border-radius: 999px; font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; transition: .2s; }
+    .btn-submit:hover { background: var(--blue-mid); box-shadow: 0 8px 24px rgba(30,58,138,.3); }
+    .form-success { display: none; text-align: center; padding: 1.5rem; color: var(--green); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); color: rgba(255,255,255,.55); padding: 3rem 5vw 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+    .footer-logo { height: 55px; width: auto; margin-bottom: 1rem; filter: brightness(0) invert(1); }
+    .footer-brand p { font-size: .85rem; line-height: 1.75; color: rgba(255,255,255,.5); max-width: 280px; }
+    .footer-col h4 { color: rgba(255,255,255,.85); font-size: .85rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: .05em; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .85rem; transition: .2s; }
+    .footer-col ul a:hover { color: var(--sky); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; text-align: center; font-size: .8rem; }
+    .footer-bottom strong { color: var(--sky); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+      .mvv-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: repeat(2,1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
+      .gal-item.tall { grid-row: span 1; }
+    }
+    @media(max-width:640px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--white); z-index: 300; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu img { height: 70px; margin-bottom: 1rem; }
+    .mobile-menu a { font-size: 1.3rem; font-weight: 700; color: var(--navy); text-decoration: none; font-family: 'Fraunces', serif; }
+    .mobile-menu a:hover { color: var(--blue); }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: var(--navy); }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <img src="logo.png" alt="Care Heart Ltd.">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#about" onclick="closeMobile()">Our Story</a>
+  <a href="#mvv" onclick="closeMobile()">Mission & Values</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#testimonials" onclick="closeMobile()">Testimonials</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#"><div class="nav-logo"><img src="logo.png" alt="Care Heart Ltd."></div></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#mvv">Values</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+  <div class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-shape hs1"></div>
+  <div class="hero-shape hs2"></div>
+  <div class="hero-shape hs3"></div>
+  <div class="hero-inner container">
+    <div class="hero-text">
+      <span class="hero-badge">📍 Calgary, Alberta, Canada</span>
+      <h1>Where Caring<br>Becomes <span class="accent">Our Purpose.</span></h1>
+      <p class="hero-desc">Care Heart Ltd. delivers professional maintenance, cleaning, and disability support services — built on empathy, excellence, and genuine human connection.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-green">Get a Free Quote</a>
+        <a href="#services" class="btn-outline">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-logo-wrap">
+        <div class="hero-logo-bg">
+          <img src="logo.png" alt="Care Heart Ltd.">
+        </div>
+        <div class="hero-badge-float hbf1">
+          <div class="hbf-label">Founded</div>
+          <div class="hbf-val">2025</div>
+        </div>
+        <div class="hero-badge-float hbf2">
+          <div class="hbf-label">Our Promise</div>
+          <div class="hbf-val green" style="font-size:1rem">We Care ❤️</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item reveal"><div class="stat-num">3</div><div class="stat-label">Service Areas</div></div>
+  <div class="stat-item reveal"><div class="stat-num">100%</div><div class="stat-label">Commitment to Quality</div></div>
+  <div class="stat-item reveal"><div class="stat-num">2</div><div class="stat-label">Founding Partners</div></div>
+  <div class="stat-item reveal"><div class="stat-num">∞</div><div class="stat-label">Care for Our Clients</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <p class="section-eyebrow reveal">What We Do</p>
+        <h2 class="section-title reveal">Services Built<br>Around <span class="itg">You</span></h2>
+      </div>
+      <p class="section-desc reveal">Every service we offer is designed with care, professionalism, and a genuine commitment to improving your daily life.</p>
+    </div>
+    <div class="services-grid">
+      <div class="srv-card s1 reveal">
+        <span class="srv-icon">🏠</span>
+        <h3>Residential Maintenance</h3>
+        <p>Professional upkeep for your home — from minor repairs to full property maintenance, ensuring your space is always in perfect condition.</p>
+        <span class="srv-tag">Residential & Commercial</span>
+      </div>
+      <div class="srv-card s2 reveal">
+        <span class="srv-icon">✨</span>
+        <h3>Cleaning Services</h3>
+        <p>Thorough and reliable cleaning for homes, offices, and commercial spaces. We bring high hygiene standards and a meticulous eye for detail.</p>
+        <span class="srv-tag">All Environments</span>
+      </div>
+      <div class="srv-card s3 reveal">
+        <span class="srv-icon">🤝</span>
+        <h3>Disability Support</h3>
+        <p>Non-medical assistance and behavioral support for people with physical, intellectual, or sensory disabilities — built on dignity and respect.</p>
+        <span class="srv-tag">Non-Medical Care</span>
+      </div>
+      <div class="srv-card s4 reveal">
+        <span class="srv-icon">📋</span>
+        <h3>Care Programs</h3>
+        <p>Design and implementation of individualized non-clinical care programs that foster independence, growth, and quality of life.</p>
+        <span class="srv-tag">Personalized Plans</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-eyebrow reveal">Transparent Pricing</p>
+    <h2 class="section-title reveal">Plans That <span class="it">Fit</span> Your Needs</h2>
+    <p class="section-desc reveal">Flexible options for every situation. Contact us for a custom quote tailored to your specific requirements.</p>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-name">Basic Care</div>
+        <div class="price-amount">Contact</div>
+        <div class="price-period">us for pricing</div>
+        <ul class="price-features">
+          <li>Single-visit cleaning</li>
+          <li>Basic home maintenance</li>
+          <li>Standard hours Mon–Fri</li>
+          <li>Service report included</li>
+        </ul>
+        <a href="#contact" class="btn-price btn-price-blue">Get a Quote</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-name">Full Support</div>
+        <div class="price-amount" style="font-size:2rem">Custom</div>
+        <div class="price-period">tailored to your needs</div>
+        <ul class="price-features">
+          <li>Regular cleaning schedule</li>
+          <li>Maintenance + support bundled</li>
+          <li>Disability care programs</li>
+          <li>Family liaison included</li>
+          <li>Priority scheduling</li>
+        </ul>
+        <a href="#contact" class="btn-price btn-price-sky">Get a Quote</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-name">Disability Care</div>
+        <div class="price-amount">Contact</div>
+        <div class="price-period">us for pricing</div>
+        <ul class="price-features">
+          <li>Behavioral support sessions</li>
+          <li>Individualized care plan</li>
+          <li>Specialist collaboration</li>
+          <li>Progress reports</li>
+        </ul>
+        <a href="#contact" class="btn-price btn-price-blue">Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img-placeholder">
+          <img src="logo.png" alt="Care Heart Ltd.">
+        </div>
+        <div class="about-stat-bubble asb1">
+          <div class="asb-num">2025</div>
+          <div class="asb-label">Year Founded</div>
+        </div>
+        <div class="about-stat-bubble asb2">
+          <div class="asb-num green">Calgary</div>
+          <div class="asb-label">Alberta, Canada</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-eyebrow reveal">Our Story</p>
+        <h2 class="section-title reveal">Built with <span class="it">Heart</span>,<br>Grown with Purpose</h2>
+        <p class="section-desc reveal">Care Heart Ltd. was born from a shared vision: that every person — regardless of ability, background, or circumstance — deserves quality care and a safe, clean environment.</p>
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-dot blue">🌱</div>
+            <div class="tl-content">
+              <h4>April 2025 — Founded</h4>
+              <p>Jeannette Rodríguez and Aixa Vásquez incorporated Care Heart Ltd. in Calgary, Alberta, combining their expertise in maintenance, cleaning, and human services.</p>
+            </div>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-dot green">🤝</div>
+            <div class="tl-content">
+              <h4>Our Three Pillars</h4>
+              <p>From day one, we built three service areas: property maintenance, cleaning services, and disability support — united by one purpose: genuine care.</p>
+            </div>
+          </div>
+          <div class="tl-item reveal">
+            <div class="tl-dot sky">🚀</div>
+            <div class="tl-content">
+              <h4>Growing in Calgary</h4>
+              <p>We are actively building our team and expanding our reach across Calgary, with a commitment to becoming the city's most trusted care services company.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MVV -->
+<section id="mvv">
+  <div class="mvv-bg"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <p class="section-eyebrow reveal" style="color:var(--sky)">Our Foundation</p>
+    <h2 class="section-title reveal" style="color:#fff">Mission, Vision &<br><span style="color:var(--sky);font-style:italic">Core Values</span></h2>
+    <div class="mvv-grid">
+      <div class="mvv-card reveal">
+        <h3>🎯 Mission</h3>
+        <p>To provide comprehensive maintenance, cleaning, and non-medical assistance services for all individuals — including people with special care needs — with high standards of quality, empathy, and social commitment, actively contributing to the well-being of our clients and their surroundings.</p>
+      </div>
+      <div class="mvv-card reveal">
+        <h3>🔭 Vision</h3>
+        <p>To be a leading company in Calgary and a benchmark in maintenance, cleaning, and personal assistance services, standing out for professional ethics, humane treatment, and continuous improvement in all our practices.</p>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal"><div class="val-icon">❤️</div><h4>Human Commitment</h4><p>Every service is an opportunity to improve our clients' quality of life.</p></div>
+      <div class="val-card reveal"><div class="val-icon">⭐</div><h4>Professional Excellence</h4><p>High operational standards and continuous improvement in everything we do.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🌍</div><h4>Respect & Inclusion</h4><p>Equal treatment and genuine value for diversity in all its forms.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🔍</div><h4>Transparency</h4><p>Clarity, honesty, and responsibility in every decision we make.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🤝</div><h4>Collaborative Work</h4><p>Teamwork, mutual respect, and open communication at our core.</p></div>
+      <div class="val-card reveal"><div class="val-icon">🌱</div><h4>Social Responsibility</h4><p>Supporting the development of people with disabilities and their families.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <p class="section-eyebrow reveal">What Clients Say</p>
+    <h2 class="section-title reveal">Stories of <span class="itg">Real</span> Impact</h2>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Care Heart transformed how we manage our home maintenance. Professional, reliable, and genuinely caring team that always goes above and beyond.</p>
+        <div class="testi-author">
+          <div class="testi-avatar av1">👩</div>
+          <div><div class="testi-name">Sarah M.</div><div class="testi-role">Homeowner, Calgary</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The disability support program for my son has been life-changing. The team is compassionate, skilled, and truly dedicated to his progress and independence.</p>
+        <div class="testi-author">
+          <div class="testi-avatar av2">👨</div>
+          <div><div class="testi-name">Carlos R.</div><div class="testi-role">Parent of FSCD Client</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Outstanding cleaning service for our office. Consistent quality, flexible scheduling, and a team that respects our workspace like it's their own.</p>
+        <div class="testi-author">
+          <div class="testi-avatar av3">👩‍💼</div>
+          <div><div class="testi-name">Linda T.</div><div class="testi-role">Business Owner, Calgary</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <p class="section-eyebrow reveal">Our Work</p>
+    <h2 class="section-title reveal">A Glimpse of <span class="itg">Care</span> in Action</h2>
+    <div class="gallery-note reveal">
+      📸 <strong>Photo gallery coming soon!</strong> — Comparte tus fotos del equipo y trabajos realizados y las agregamos aquí.
+    </div>
+    <div class="gallery-grid">
+      <div class="gal-item gi1 tall reveal">🏠</div>
+      <div class="gal-item gi2 reveal">✨</div>
+      <div class="gal-item gi3 reveal">🤝</div>
+      <div class="gal-item gi4 reveal">📋</div>
+      <div class="gal-item gi5 reveal">❤️</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-eyebrow reveal">Got Questions?</p>
+    <h2 class="section-title reveal">Frequently Asked <span class="it">Questions</span></h2>
+    <div class="faq-list">
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What areas of Calgary do you serve?<span class="faq-icon">+</span></div><div class="faq-a">We serve Calgary and surrounding areas in Alberta. Contact us to confirm service availability in your specific neighborhood.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Are your disability support services covered by FSCD?<span class="faq-icon">+</span></div><div class="faq-a">We work with families receiving FSCD (Family Support for Children with Disabilities) funding. Contact us to discuss your specific situation and how we can support your family's needs.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Do you offer one-time or recurring services?<span class="faq-icon">+</span></div><div class="faq-a">We offer both! Whether you need a one-time deep clean, occasional maintenance, or ongoing weekly support services, we can create a schedule that works for you.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Are your staff trained and background-checked?<span class="faq-icon">+</span></div><div class="faq-a">Yes. All our team members are carefully screened, trained in ethical treatment and professional standards, and committed to the highest quality of care and service.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">How do I get started?<span class="faq-icon">+</span></div><div class="faq-a">Simply fill out our contact form below or send us an email. We'll respond within 24 hours to discuss your needs and provide a personalized quote at no cost.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Do you provide services for commercial properties?<span class="faq-icon">+</span></div><div class="faq-a">Absolutely! We offer cleaning and maintenance services for residential, commercial, and industrial environments. Contact us for a custom commercial quote.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <p class="section-eyebrow reveal">News & Tips</p>
+    <h2 class="section-title reveal">From the <span class="it">Care Heart</span> Blog</h2>
+    <div class="blog-grid">
+      <div class="blog-card reveal"><div class="blog-thumb bt1">🏠</div><div class="blog-body"><div class="blog-tag">Maintenance</div><h3>5 Home Maintenance Tips for Calgary Winters</h3><p>Prepare your property for Alberta's harsh winters with these essential maintenance checks.</p><div class="blog-date">Coming soon</div></div></div>
+      <div class="blog-card reveal"><div class="blog-thumb bt2">🤝</div><div class="blog-body"><div class="blog-tag">Disability Support</div><h3>Understanding FSCD Funding in Alberta</h3><p>A guide for families navigating the Family Support for Children with Disabilities program.</p><div class="blog-date">Coming soon</div></div></div>
+      <div class="blog-card reveal"><div class="blog-thumb bt3">✨</div><div class="blog-body"><div class="blog-tag">Cleaning</div><h3>How to Choose the Right Cleaning Service</h3><p>What to look for when selecting a professional cleaning partner for your business.</p><div class="blog-date">Coming soon</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-eyebrow reveal">Let's Connect</p>
+    <h2 class="section-title reveal">Ready to Work <span class="itg">Together?</span></h2>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>We'd love to hear from you.</h3>
+        <p>Whether you need a quote, have questions about our services, or want to learn more about how we can help — reach out and we'll get back to you within 24 hours.</p>
+        <div class="contact-items">
+          <a href="mailto:info@careheart.ca" class="contact-item"><div class="ci-icon ci-blue">📧</div><div class="ci-text"><strong>Email Us</strong><span>info@careheart.ca</span></div></a>
+          <a href="tel:+1" class="contact-item"><div class="ci-icon ci-green">📞</div><div class="ci-text"><strong>Call Us</strong><span>Add your phone number</span></div></a>
+          <span class="contact-item"><div class="ci-icon ci-sky">📍</div><div class="ci-text"><strong>Location</strong><span>Calgary, Alberta, Canada</span></div></span>
+          <span class="contact-item"><div class="ci-icon ci-blue">🕐</div><div class="ci-text"><strong>Hours</strong><span>Mon–Fri: 8am–6pm MT</span></div></span>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="John" id="fname"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" id="lname"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@email.com" id="femail"></div>
+        <div class="form-group"><label>Service Needed</label>
+          <select id="fservice">
+            <option value="">Select a service...</option>
+            <option>Home Maintenance</option>
+            <option>Cleaning Services</option>
+            <option>Disability Support</option>
+            <option>Care Program</option>
+            <option>Other / Multiple Services</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your needs..." id="fmessage"></textarea></div>
+        <button class="btn-submit" onclick="submitForm()">Send Message →</button>
+        <div class="form-success" id="formSuccess">✅ Thank you! We'll be in touch within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Care Heart Ltd." class="footer-logo">
+      <p>Providing comprehensive maintenance, cleaning, and disability support services in Calgary, Alberta — with empathy, professionalism, and genuine commitment to your well-being.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Home Maintenance</a></li>
+        <li><a href="#services">Cleaning Services</a></li>
+        <li><a href="#services">Disability Support</a></li>
+        <li><a href="#services">Care Programs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#mvv">Mission & Values</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <strong>Care Heart Ltd.</strong> — <em style="color:var(--sky)">We care about you.</em><br>
+    Incorporated in Calgary, Alberta, Canada · April 2025 · © 2025 Care Heart Ltd. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
+  function openMobile() { document.getElementById('mobileMenu').classList.add('open'); }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+  function submitForm() {
+    if (!document.getElementById('fname').value || !document.getElementById('femail').value) { alert('Please fill in your name and email.'); return; }
+    document.querySelector('.btn-submit').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
